@@ -27,14 +27,6 @@ setup(
         'repocribro',
         'flask'
     ],
-    setup_requires=[
-        'pytest-runner',
-    ],
-    tests_require=[
-        'pytest-pep8',
-        'pytest-cov',
-        'pytest'
-    ],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',

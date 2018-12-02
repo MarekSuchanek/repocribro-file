@@ -1,7 +1,7 @@
 repocribro-file
 ===============
 
-|license| |travis| |coveralls| |docs|
+|license|
 
 Repocribro-file is extension for `Repocribro`_ web application adding
 functionality to gather information from specified file in repositories.
@@ -14,14 +14,6 @@ not running any scripts and tests.
 .. |license| image:: https://img.shields.io/badge/license-MIT-blue.svg
     :alt: License
     :target: LICENSE
-.. |travis| image:: https://travis-ci.org/MarekSuchanek/repocribro-file.svg?branch=master
-    :alt: Build Status
-    :target: https://travis-ci.org/MarekSuchanek/repocribro-file
-.. |coveralls| image:: https://coveralls.io/repos/github/MarekSuchanek/repocribro-file/badge.svg?branch=master
-    :alt: Test Coverage
-    :target: https://coveralls.io/github/MarekSuchanek/repocribro-file?branch=master
-.. |docs| image:: https://readthedocs.org/projects/repocribro-file/badge/?version=latest
-    :alt: Documentation Status
-    :target: http://repocribro-file.readthedocs.io/en/latest/?badge=latest
+
 
 
