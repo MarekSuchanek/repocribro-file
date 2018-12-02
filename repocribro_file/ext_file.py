@@ -27,3 +27,7 @@ class FileExtension(Extension):
     # TODO: tab for repository with files
 
     # TODO: search by content of file
+
+
+def make_extension(*args, **kwargs):
+    return FileExtension(*args, **kwargs)

@@ -20,7 +20,7 @@ setup(
     },
     entry_points={
         'repocribro.ext': [
-            'repocribro-file = repocribro_file:FileExtension'
+            'repocribro-file = repocribro_file:make_extension'
         ]
     },
     install_requires=[

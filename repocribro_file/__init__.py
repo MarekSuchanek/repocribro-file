@@ -1,3 +1,3 @@
-from .ext_file import FileExtension
+from repocribro_file.ext_file import make_extension
 
-__all__ = ['FileExtension']
+__all__ = ['make_extension']
