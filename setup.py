@@ -16,7 +16,9 @@ setup(
     zip_safe=False,
     packages=find_packages(),
     package_data={
-        'repocribro_file': []
+        'repocribro_file': [
+            'templates/core/repo/*.html',
+        ]
     },
     entry_points={
         'repocribro.ext': [
