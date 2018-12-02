@@ -12,3 +12,15 @@ class FileExtension(Extension):
     GH_URL = 'https://github.com/MarekSuchanek/repocribro-file'
     #: Priority of file extension
     PRIORITY = 100
+
+    # TODO: model(s)
+
+    # TODO: templates
+
+    # TODO: push webhook
+
+    # TODO: admin for add/remove file specs
+
+    # TODO: tab for repository with files
+
+    # TODO: search by content of file
