@@ -13,7 +13,10 @@ class FileExtension(Extension):
     #: Priority of file extension
     PRIORITY = 100
 
-    # TODO: model(s)
+    @staticmethod
+    def provide_models():
+        from repocribro_file.models import all_models
+        return all_models
 
     # TODO: templates
 
