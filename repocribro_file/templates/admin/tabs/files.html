@@ -1,0 +1,34 @@
+{% from "macros/basic.html" import octicon without context %}
+<h2>File Descriptors</h2>
+
+<a href="{{ url_for('admin-files.create_file') }}" class="btn btn-success">
+    {{ octicon('plus') }} Create new file descriptor
+</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Filename</th>
+            <th>Type</th>
+            <th>Instances</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for filedescriptor in filedescriptors %}
+        <tr>
+            <td>{{ filedescriptor.filename }}</td>
+            <td>{{ filedescriptor.filetype }}</td>
+            <td>{{ filedescriptor.instances|length }}</td>
+            <td class="buttons-cell">
+                <a href="{{ url_for('admin-files.edit_file', slug=page.slug) }}" class="btn btn-primary btn-small">
+                    {{ octicon('tools') }}
+                </a>
+                <a href="{{ url_for('admin-files.delete_file', slug=page.slug) }}" class="btn btn-danger btn-small">
+                    {{ octicon('trashcan') }}
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
