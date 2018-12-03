@@ -72,6 +72,11 @@ class FileInstance(db.Model, SearchableMixin, SerializableMixin):
         'Repository', back_populates='files'
     )
 
+    def __init__(self, content, repository_id, fd_id):
+        self.content = content
+        self.descriptor_id = fd_id
+        self.repository_id = repository_id
+
     def __repr__(self):
         """Standard string representation of DB object
 
@@ -79,6 +84,10 @@ class FileInstance(db.Model, SearchableMixin, SerializableMixin):
         :rtype: str
         """
         return f'<FileInstance #{self.id}>'
+
+    def update(self, content):
+        self.content = content
+        self.timestamp = datetime.datetime.utcnow()
 
 
 Repository.files = sqlalchemy.orm.relationship(

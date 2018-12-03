@@ -1,10 +1,53 @@
+import base64
 import flask
+import requests
 
 from repocribro.extending import Extension
 from repocribro.extending.helpers import ViewTab, Badge
 
 
-from repocribro_file.models import FileDescriptor
+from repocribro_file.models import FileDescriptor, FileInstance
+
+
+def get_content(repo, filepath):
+    # TODO: use user's token for private repos
+    r = requests.get(f'https://api.github.com/repos/{repo.full_name}/contents/{filepath}')
+    try:
+        r.raise_for_status()
+        content = r.json()['content']
+        if r.json()['encoding'] == 'base64':
+            content = base64.b64decode(content)
+        return content
+    except Exception:
+        return None
+
+
+def update_repo_file(db, repo, fd):
+    fi = db.session.query(FileInstance).filter_by(
+        repository_id=repo.id, descriptor_id=fd.id
+    ).first()
+    content = get_content(repo, fd.filename)
+    if content is None:
+        return  # failed to get content
+    if fi is None:
+        fi = FileInstance(content, repo.id, fd.id)
+        db.session.add(fi)
+    else:
+        fi.update(content)
+    db.session.commit()
+
+
+def update_repo_files(db, repo, *args, **kwargs):
+    """Process push webhook msg
+
+    .. todo:: deal with limit of commits in webhook msg (20)
+    """
+    fds = db.session.query(FileDescriptor).all()
+    for fd in fds:
+        try:
+            update_repo_file(db, repo, fd)
+        except Exception:
+            pass  # TODO: log problems
 
 
 class FileExtension(Extension):
@@ -34,7 +77,19 @@ class FileExtension(Extension):
         from jinja2 import PackageLoader
         return PackageLoader('repocribro_file', 'templates')
 
-    # TODO: push webhook
+    @staticmethod
+    def get_gh_webhook_processors():
+        """Get all GitHub webhooks processory"""
+        return {
+            'push': [update_repo_files]
+        }
+
+    @staticmethod
+    def get_gh_event_processors():
+        """Get all GitHub events processors"""
+        return {
+            'push': [update_repo_files]
+        }
 
     def view_core_repo_detail_tabs(self, repo, tabs_dict):
         tabs_dict['files'] = ViewTab(
