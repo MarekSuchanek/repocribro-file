@@ -5,7 +5,7 @@ with open('README.rst') as f:
 
 setup(
     name='repocribro-file',
-    version='0.0',
+    version='0.1',
     keywords='github repositories sieve projects community',
     description='Repocribro extension allowing getting repo information from defined file',
     long_description=long_description,
