@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    {# TODO: Back, edit, delete buttons #}
+
+    <h1>{{ fd.filename }}</h1>
+
+    <ul>
+        <li><em>File type</em>: {{ fd.filetype }}</li>
+    </ul>
+
+    <p>{{ fd.description }}</p>
+
+    <h2>Instances</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Repository</th>
+                <th>Timestamp</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fi in fd.instance %}
+            <tr>
+                <td><a href="{{ url_for('core.repo_detail', login=fi.repository.owner.login, reponame=fi.repository.name) }}">{{ fi.repository.full_name }}</a></td>
+                <td>{{ fd.timestamp.strftime('%d-%m-%Y %H:%M:%S') }}</td>
+                <td class="buttons-cell">
+                    {# TODO: update & delete #}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

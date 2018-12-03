@@ -5,7 +5,7 @@ with open('README.rst') as f:
 
 setup(
     name='repocribro-file',
-    version='0.0',
+    version='0.1',
     keywords='github repositories sieve projects community',
     description='Repocribro extension allowing getting repo information from defined file',
     long_description=long_description,
@@ -16,11 +16,13 @@ setup(
     zip_safe=False,
     packages=find_packages(),
     package_data={
-        'repocribro_file': []
+        'repocribro_file': [
+            'templates/core/repo/*.html',
+        ]
     },
     entry_points={
         'repocribro.ext': [
-            'repocribro-file = repocribro_file:FileExtension'
+            'repocribro-file = repocribro_file:make_extension'
         ]
     },
     install_requires=[
