@@ -26,6 +26,13 @@ class FileDescriptor(db.Model, SearchableMixin, SerializableMixin):
         cascade='all, delete-orphan'
     )
 
+    filetypes = ['unspecified', 'YAML', 'JSON']
+
+    def __init__(self, filename, description, filetype='unspecified'):
+        self.filename = filename
+        self.description = description
+        self.filetype = filetype
+
     def __repr__(self):
         """Standard string representation of DB object
 

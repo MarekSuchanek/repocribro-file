@@ -15,16 +15,16 @@
         </tr>
     </thead>
     <tbody>
-    {% for filedescriptor in filedescriptors %}
+    {% for fd in filedescriptors %}
         <tr>
-            <td>{{ filedescriptor.filename }}</td>
-            <td>{{ filedescriptor.filetype }}</td>
-            <td>{{ filedescriptor.instances|length }}</td>
+            <td><a href="{{ url_for('admin-files.show_file', fd_id=fd.id) }}">{{ fd.filename }}</a></td>
+            <td>{{ fd.filetype }}</td>
+            <td>{{ fd.instances|length }}</td>
             <td class="buttons-cell">
-                <a href="{{ url_for('admin-files.edit_file', slug=page.slug) }}" class="btn btn-primary btn-small">
+                <a href="{{ url_for('admin-files.edit_file', fd_id=fd.id) }}" class="btn btn-primary btn-small">
                     {{ octicon('tools') }}
                 </a>
-                <a href="{{ url_for('admin-files.delete_file', slug=page.slug) }}" class="btn btn-danger btn-small">
+                <a href="{{ url_for('admin-files.delete_file', fd_id=fd.id) }}" class="btn btn-danger btn-small">
                     {{ octicon('trashcan') }}
                 </a>
             </td>
